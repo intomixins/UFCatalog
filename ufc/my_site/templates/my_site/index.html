@@ -1,11 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Page</title>
-</head>
-<body>
-    <h1>Hello</h1>
-</body>
-</html>
+{% extends 'my_site/base.html' %}
+
+{% block content %}
+<ul class="list-articles">
+	{% for p in posts %}
+			<li><h2>{{p.name}} {{p.last_name}}</h2>
+	{% autoescape on %}
+	<!--	{{p.content|linebreaks|truncatewords:50}}-->
+	<ul>
+		<li>Рекорд: {{p.record}}</li>
+		<li>Завершил карьеру: {{p.is_retired}}</li>
+		<li>Стиль: {{p.style}}</li>
+		{{p.description|linebreaks|truncatewords:70}}
+	</ul>
+	{% endautoescape %}
+			<div class="clear"></div>
+			<p class="link-read-post"><a href="#">Читать пост</a></p>
+			</li>
+	{% endfor %}
+</ul>
+{% endblock %}
